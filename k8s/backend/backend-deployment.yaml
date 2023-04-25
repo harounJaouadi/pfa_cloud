@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: sadook/backend_api
+        ports:
+        - containerPort: 8000
+        env:
+          - name: DB_HOST
+            value: db
+          - name: DB_PORT
+            value: '5432'
+          - name: DB_USER
+            value: sadok
+          - name: DB_PASSWORD
+            value: azerty
+          - name: DB_DATABASE
+            value: nest
+          - name: REDIS_HOST
+            value: redis
+          - name: REDIS_PORT
+            value: '6379'
+          - name: MAILHOG_HOST
+            value: mailhog
+          - name: MAILHOG_PORT
+            value: '1025'
+          - name: MAILHOG_EMAIL
+            value: no-reply@example.com

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: ingress-app
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: ambassadorapp.northeurope.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: adminfront
+            port:
+              number: 80
+#  - host: ambassador.ambassadorapp.northeurope.cloudapp.azure.com
+#    http:
+#      paths:
+#      - path: /
+#        pathType: Prefix
+#        backend:
+#          service:
+#            name: ambassadorfront
+#            port:
+#              number: 4000
+        
